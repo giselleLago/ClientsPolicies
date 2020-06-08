@@ -1,8 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+﻿<br />
+<div class="container row p-0 m-0">
+    <div class="col-11 text-center">
+        <h2 class="text-info">AXA Insurance Company</h2>
+    </div>
+    <div class="col-4 row p-5 pl-5 ml-5">
+        <a asp-action="Index" asp-controller="Clients" class="btn btn-info form-control text-white">User</a>
+    </div>
+    <div class="col-4 row p-5 ml-5">
+        <a asp-action="Index" asp-controller="Policies" class="btn btn-info form-control text-white">Admin</a>
+    </div>
 </div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
