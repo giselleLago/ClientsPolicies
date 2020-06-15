@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClientsPolicies.Models;
+using ClientsPolicies.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,7 @@ namespace ClientsPolicies.Controllers
 {
     public class ClientsController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private ApplicationDbContext _db;
         [BindProperty]
         public Clients Client { get; set; }
         public ClientsController(ApplicationDbContext db)
@@ -22,60 +23,27 @@ namespace ClientsPolicies.Controllers
             return View();
         }
 
-        public IActionResult Upsert(int? id)
+        private void LoadTable()
         {
-            Client = new Clients();
-            if (id == null)
+            DataAccess dataAccess = new DataAccess();
+            var dataA = dataAccess.ExtractData();
+            foreach (var item in dataA)
             {
-                return View(Client);
-            }
-            Client = _db.Clients.FirstOrDefault(u => u.Id == id);
-            if (Client == null)
-            {
-                return NotFound();
-            }
-            return View(Client);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Upsert()
-        {
-            if (ModelState.IsValid)
-            {
-                if (Client.Id == 0)
-                {
-                    //create
-                    _db.Clients.Add(Client);
-                }
-                else
-                {
-                    _db.Clients.Update(Client);
-                }
+                _db.Clients.Add(item);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(Client);
         }
 
         #region Api Calls
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Json(new { data = await _db.Clients.ToListAsync() });
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var clientFromDb = await _db.Clients.FirstOrDefaultAsync(i => i.Id == id);
-            if (clientFromDb == null)
+            if (_db.Clients.Count() == 0)
             {
-                return Json(new { success = false, message = "Error while Deleting" });
+                LoadTable();
+                return Json(new { data = await _db.Clients.ToListAsync() });
             }
-            _db.Clients.Remove(clientFromDb);
-            await _db.SaveChangesAsync();
-            return Json(new { success = true, message = "Delete successful" });
+            return Json(new { data = await _db.Clients.ToListAsync() });
         }
         #endregion
     }
