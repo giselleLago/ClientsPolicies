@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClientsPolicies.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200605173818_AddClientToDb")]
+    [Migration("20200612150732_AddClientToDb")]
     partial class AddClientToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,10 +22,8 @@ namespace ClientsPolicies.Migrations
 
             modelBuilder.Entity("ClientsPolicies.Models.Clients", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
