@@ -18,21 +18,7 @@ function loadDataTable() {
             { "data": "inceptionDate", "width": "20%" },
             { "data": "installmentPayment", "width": "20%" },
             { "data": "clientId", "width": "20%" },
-            {
-                "data": "id",
-                "render": function (data) {
-                    return `<div class="text-center">
-                        <a href="/Admin/Upsert?id=${data}" class='btn btn-success text-white' style='cursor:pointer; width:70px;'>
-                            Edit
-                        </a>
-                        &nbsp;
-                        </div>`;
-                }, "width": "40%"
-            }
-        ],
-        "language": {
-            "emptyTable": "no data found"
-        },
-        "width": "100%"
+            
+        ]
     });
 }
