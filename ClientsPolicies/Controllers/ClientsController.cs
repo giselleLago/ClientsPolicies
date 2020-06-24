@@ -26,7 +26,7 @@ namespace ClientsPolicies.Controllers
         private void LoadTable()
         {
             DataAccess dataAccess = new DataAccess();
-            var dataA = dataAccess.ExtractData();
+            var dataA = dataAccess.ExtractClientsData();
             foreach (var item in dataA)
             {
                 _db.Clients.Add(item);
