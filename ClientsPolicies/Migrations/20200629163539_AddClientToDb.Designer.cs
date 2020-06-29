@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClientsPolicies.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200612150732_AddClientToDb")]
+    [Migration("20200629163539_AddClientToDb")]
     partial class AddClientToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -38,6 +38,31 @@ namespace ClientsPolicies.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("ClientsPolicies.Models.Policies", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("AmountInsured")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InceptionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("InstallmentPayment")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Policies");
                 });
 #pragma warning restore 612, 618
         }
