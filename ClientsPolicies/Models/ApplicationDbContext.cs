@@ -14,6 +14,7 @@ namespace ClientsPolicies.Models
         }
 
         public DbSet<Clients> Clients { get; set; }
+        public DbSet<Policies> Policies { get; set; }
 
     }
 }
