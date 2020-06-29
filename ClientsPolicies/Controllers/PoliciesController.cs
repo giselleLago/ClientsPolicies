@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ClientsPolicies.Models;
 using ClientsPolicies.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClientsPolicies.Controllers
 {
@@ -37,7 +38,7 @@ namespace ClientsPolicies.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            if (_db.Clients.Count() == 0)
+            if (_db.Policies.Count() == 0)
             {
                 LoadTable();
                 return Json(new { data = await _db.Policies.ToListAsync() });
