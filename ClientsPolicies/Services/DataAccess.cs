@@ -15,7 +15,7 @@ namespace ClientsPolicies.Services
     public class DataAccess
     {
         private readonly string _urlClients = "http://www.mocky.io/v2/5808862710000087232b75ac";
-        private readonly string _urlPolicies = "http://www.mocky.io/v2/5808862710000087232b75ac";
+        private readonly string _urlPolicies = "http://www.mocky.io/v2/580891a4100000e8242b75c5";
 
         public List<Policies> ExtractPoliciesData()
         {
